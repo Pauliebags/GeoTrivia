@@ -75,6 +75,15 @@ class MainMenuScreen extends StatelessWidget {
               child: const Text('Settings'),
             ),
             _gap,
+            ElevatedButton(
+              onPressed: () {
+
+                GoRouter.of(context).go('/ProfileScreen');
+              },
+              child: const Text('Profile'),
+            ),
+
+
             Padding(
               padding: const EdgeInsets.only(top: 32),
               child: ValueListenableBuilder<bool>(

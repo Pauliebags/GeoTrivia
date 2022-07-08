@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 final formkey=GlobalKey<FormState>();
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
 TextEditingController confirmpassword = TextEditingController();
 TextEditingController emailaddress = TextEditingController();
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+FirebaseAuth user =FirebaseAuth.instance;
 RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
 //A function that validate user entered password
 bool validatePassword(String pass){
@@ -113,11 +117,17 @@ class CreateAccountScreen extends StatelessWidget {
             ///gender /// bithdate bouns
             //// Button for save value
             MaterialButton(
-              onPressed: () {
+              onPressed: () async{
                 if(!formkey.currentState!.validate()){
                   return;
                 }
                 formkey.currentState!.save();
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailaddress.text, password: confirmpassword.text);
+                firestore.collection('Users').doc(user.currentUser!.uid).set({
+                  'UserName':username.text,
+                  'UserEmail':emailaddress.text,
+                  'UserPhone':123456,
+                });
                 //// after save the value go to main screen (the root)
                 //// use Go_Router Function to go to this screen
                 context.go('/');

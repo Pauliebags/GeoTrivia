@@ -1,17 +1,14 @@
 // Uncomment the following lines when enabling Firebase Crashlytics
 // import 'dart:io';
-// import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
-
-
-
-
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:game_template/src/Create_Account/Create_Account_Screen.dart';
+import 'package:game_template/src/Profile_Screen/Profile_Screen.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
@@ -44,7 +41,8 @@ Future<void> main() async {
   // To enable Firebase Crashlytics, uncomment the following lines and
   // the import statements at the top of this file.
   // See the 'Crashlytics' section of the main README.md file for details.
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   FirebaseCrashlytics? crashlytics;
   // if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
   //   try {
@@ -127,11 +125,19 @@ Logger _log = Logger('main.dart');
 
 class MyApp extends StatelessWidget {
   static final _router = GoRouter(
-    initialLocation: '/signin' ,
+    initialLocation: '/signin',
     routes: [
-      GoRoute(path: '/CreateAccount', builder: (context,state)=>CreateAccountScreen()),
-    // GoRoute(path: '/ForgotPassword', builder: (context,state)=>ForgotPasswordScreen()),
-      GoRoute(path: '/signin',builder:(context,state)=>SignInScreen()),
+      GoRoute(
+          path: '/ProfileScreen',
+          pageBuilder: (context, state) => buildMyTransition(
+                child: ProfileScreen(),
+                color: context.watch<Palette>().backgroundLevelSelection,
+              )),
+      GoRoute(
+          path: '/CreateAccount',
+          builder: (context, state) => CreateAccountScreen()),
+      // GoRoute(path: '/ForgotPassword', builder: (context,state)=>ForgotPasswordScreen()),
+      GoRoute(path: '/signin', builder: (context, state) => SignInScreen()),
       GoRoute(
           path: '/',
           builder: (context, state) =>
