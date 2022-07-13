@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:game_template/src/Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -24,16 +25,17 @@ class MainMenuScreen extends StatelessWidget {
     final audioController = context.watch<AudioController>();
 
     return Scaffold(
-      backgroundColor: palette.backgroundMain,
+      backgroundColor: AppColor.pripmaryColor,
       body: ResponsiveScreen(
         mainAreaProminence: 0.45,
         squarishMainArea: Center(
           child: Transform.rotate(
             angle: -0.1,
             child: const Text(
-              'Flutter Game Template!',
+              'GeoTrivia!',
               textAlign: TextAlign.center,
               style: TextStyle(
+                color: Color(0xFF117eeb),
                 fontFamily: 'Permanent Marker',
                 fontSize: 55,
                 height: 1,
@@ -44,6 +46,11 @@ class MainMenuScreen extends StatelessWidget {
         rectangularMenuArea: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Image.asset('assets/images/geotrivia.jpg',
+                width: 200.0, height: 200.0),
+            SizedBox(
+              height: 70,
+            ),
             ElevatedButton(
               onPressed: () {
                 audioController.playSfx(SfxType.buttonTap);
@@ -77,13 +84,10 @@ class MainMenuScreen extends StatelessWidget {
             _gap,
             ElevatedButton(
               onPressed: () {
-
                 GoRouter.of(context).go('/ProfileScreen');
               },
               child: const Text('Profile'),
             ),
-
-
             Padding(
               padding: const EdgeInsets.only(top: 32),
               child: ValueListenableBuilder<bool>(
@@ -96,8 +100,6 @@ class MainMenuScreen extends StatelessWidget {
                 },
               ),
             ),
-            _gap,
-            const Text('Music by Mr Smith'),
             _gap,
           ],
         ),

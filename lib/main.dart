@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:game_template/src/Create_Account/Create_Account_Screen.dart';
 import 'package:game_template/src/Profile_Screen/Profile_Screen.dart';
+import 'package:game_template/src/Questions/screens/main_menu.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
@@ -137,7 +138,7 @@ class MyApp extends StatelessWidget {
           path: '/CreateAccount',
           builder: (context, state) => CreateAccountScreen()),
       // GoRoute(path: '/ForgotPassword', builder: (context,state)=>ForgotPasswordScreen()),
-      GoRoute(path: '/signin', builder: (context, state) => SignInScreen()),
+      GoRoute(path: '/signin', builder: (context, state) => SignInScreen(),routes: []),
       GoRoute(
           path: '/',
           builder: (context, state) =>
@@ -146,42 +147,42 @@ class MyApp extends StatelessWidget {
             GoRoute(
                 path: 'play',
                 pageBuilder: (context, state) => buildMyTransition(
-                      child: const LevelSelectionScreen(
-                          key: Key('level selection')),
+                      child:MainMenu(),
                       color: context.watch<Palette>().backgroundLevelSelection,
                     ),
-                routes: [
-                  GoRoute(
-                    path: 'session/:level',
-                    pageBuilder: (context, state) {
-                      final levelNumber = int.parse(state.params['level']!);
-                      final level = gameLevels
-                          .singleWhere((e) => e.number == levelNumber);
-                      return buildMyTransition(
-                        child: PlaySessionScreen(
-                          level,
-                          key: const Key('play session'),
-                        ),
-                        color: context.watch<Palette>().backgroundPlaySession,
-                      );
-                    },
-                  ),
-                  GoRoute(
-                    path: 'won',
-                    pageBuilder: (context, state) {
-                      final map = state.extra! as Map<String, dynamic>;
-                      final score = map['score'] as Score;
-
-                      return buildMyTransition(
-                        child: WinGameScreen(
-                          score: score,
-                          key: const Key('win game'),
-                        ),
-                        color: context.watch<Palette>().backgroundPlaySession,
-                      );
-                    },
-                  )
-                ]),
+                // routes: [
+                //   GoRoute(
+                //     path: 'session/:level',
+                //     pageBuilder: (context, state) {
+                //       final levelNumber = int.parse(state.params['level']!);
+                //       final level = gameLevels
+                //           .singleWhere((e) => e.number == levelNumber);
+                //       return buildMyTransition(
+                //         child: PlaySessionScreen(
+                //           level,
+                //           key: const Key('play session'),
+                //         ),
+                //         color: context.watch<Palette>().backgroundPlaySession,
+                //       );
+                //     },
+                //   ),
+                //   GoRoute(
+                //     path: 'won',
+                //     pageBuilder: (context, state) {
+                //       final map = state.extra! as Map<String, dynamic>;
+                //       final score = map['score'] as Score;
+                //
+                //       return buildMyTransition(
+                //         child: WinGameScreen(
+                //           score: score,
+                //           key: const Key('win game'),
+                //         ),
+                //         color: context.watch<Palette>().backgroundPlaySession,
+                //       );
+                //     },
+                //   )
+                // ],
+            ),
             GoRoute(
               path: 'settings',
               builder: (context, state) =>
@@ -257,6 +258,7 @@ class MyApp extends StatelessWidget {
           final palette = context.watch<Palette>();
 
           return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             title: 'GeoTrivia',
             theme: ThemeData.from(
               colorScheme: ColorScheme.fromSeed(
