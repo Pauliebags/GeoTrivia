@@ -4,18 +4,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:game_template/src/Questions/ui/shared/color.dart';
+import 'package:game_template/src/settings/settings.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
+bool checkPolicy =false;
 bool _passwordInVisible = true; //a boolean value
 bool _confirmpasswordInVisible = true; //a boolean value
 final formkey = GlobalKey<FormState>();
 Position? gp;
 var cl;
 dynamic placemarks;
-late  Locale? deviceLocale;
+late Locale? deviceLocale;
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
 TextEditingController confirmpassword = TextEditingController();
@@ -45,13 +48,30 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+
   @override
   Widget build(BuildContext context) {
+    final settingsController = context.watch<SettingsController>();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: (){
+          GoRouter.of(context).go('/signin');
+        },),
         centerTitle: true,
         backgroundColor: AppColor.pripmaryColor,
         title: Text('Create New Account'),
+        actions: [
+           ValueListenableBuilder<bool>(
+              valueListenable: settingsController.muted,
+              builder: (context, muted, child) {
+                return IconButton(
+                  onPressed: () => settingsController.toggleMuted(),
+                  icon: Icon(muted ? Icons.volume_off : Icons.volume_up),
+                );
+              },
+            ),
+
+        ],
       ),
       backgroundColor: AppColor.pripmaryColor,
       body: Form(
@@ -62,7 +82,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               SizedBox(
                 height: 10,
               ),
-              Image.asset('assets/images/geotrivia.jpg' ,width: 150.0, height: 150.0),
+              Image.asset('assets/images/geotrivia.jpg',
+                  width: 150.0, height: 150.0),
+
               /// username
               Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -120,11 +142,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _passwordInVisible ? Icons.visibility_off : Icons.visibility, //change icon based on boolean value
-                            color: Theme.of(context).primaryColorDark,),
-                          onPressed: (){
-                            setState((){
-                              _passwordInVisible = !_passwordInVisible; //change boolean value
+                            _passwordInVisible
+                                ? Icons.visibility_off
+                                : Icons
+                                    .visibility, //change icon based on boolean value
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordInVisible =
+                                  !_passwordInVisible; //change boolean value
                             });
                           },
                         ),
@@ -162,11 +189,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _confirmpasswordInVisible ? Icons.visibility_off : Icons.visibility, //change icon based on boolean value
-                            color: Theme.of(context).primaryColorDark,),
-                          onPressed: (){
-                            setState((){
-                              _confirmpasswordInVisible = !_confirmpasswordInVisible; //change boolean value
+                            _confirmpasswordInVisible
+                                ? Icons.visibility_off
+                                : Icons
+                                    .visibility, //change icon based on boolean value
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _confirmpasswordInVisible =
+                                  !_confirmpasswordInVisible; //change boolean value
                             });
                           },
                         ),
@@ -208,6 +240,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
+              CheckboxListTile(
+                value: checkPolicy,
+                onChanged: (value) {
+                  setState((){
+                    checkPolicy=value!;
+                  });
+                },
+                title: Text('GDPR policy accept'),
+              ),
               ///// GET LOCATION FROM HERE
               MaterialButton(
                 onPressed: () async {
@@ -227,53 +268,71 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   per = await Geolocator.checkPermission();
                   if (per == LocationPermission.denied) {
                     per = await Geolocator.requestPermission();
-                 //   if (per == LocationPermission.always) {
-                      /////Get Postion
-                      // cl = await getPostion();
-                      // print(cl!.latitude);
-                      // print(cl!.longitude);
-               //     }
+                    //   if (per == LocationPermission.always) {
+                    /////Get Postion
+                    // cl = await getPostion();
+                    // print(cl!.latitude);
+                    // print(cl!.longitude);
+                    //     }
                   }
                   gp = await getPostion();
 
                   // print(per);
-                  placemarks = await placemarkFromCoordinates(gp!.latitude, gp!.longitude);
-                  await CountryCodes.init(); // Optionally, you may provide a `Locale` to get countrie's localizadName
+                  placemarks = await placemarkFromCoordinates(
+                      gp!.latitude, gp!.longitude);
+                  await CountryCodes
+                      .init(); // Optionally, you may provide a `Locale` to get countrie's localizadName
 
-                   deviceLocale = CountryCodes.getDeviceLocale();
+                  deviceLocale = CountryCodes.getDeviceLocale();
                   print(deviceLocale!.countryCode); // Displays US
-
                 },
                 child: Text('Get Your Location'),
                 color: Colors.greenAccent,
               ),
 
               //// MAKE IT DYNAMIC
-              placemarks==null?Container():
-              Text( placemarks[0].country,style: TextStyle(color: Colors.white),),
+              placemarks == null
+                  ? Container()
+                  : Text(
+                      placemarks[0].country,
+                      style: TextStyle(color: Colors.white),
+                    ),
 
               ///gender /// bithdate bouns
               //// Button for save value
               MaterialButton(
                 onPressed: () async {
-
                   if (!formkey.currentState!.validate()) {
                     return;
                   }
+                  if(checkPolicy==false){
+                    Fluttertoast.showToast(
+                        msg: "accept the policy",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.black,
+                        fontSize: 16.0);
+                  }
                   formkey.currentState!.save();
-                  try{
+                  try {
                     await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: emailaddress.text, password: confirmpassword.text);
-                    firestore.collection('Users').doc(user.currentUser!.uid).set({
+                        email: emailaddress.text,
+                        password: confirmpassword.text);
+                    firestore
+                        .collection('Users')
+                        .doc(user.currentUser!.uid)
+                        .set({
                       'UserName': username.text,
                       'UserEmail': emailaddress.text,
-                      'UserCountry':placemarks[0].country,
-                      'CountryCode':deviceLocale!.countryCode,
+                      'UserCountry': placemarks[0].country,
+                      'CountryCode': deviceLocale!.countryCode,
                     });
                     //// after save the value go to main screen (the root)
                     //// use Go_Router Function to go to this screen
-                    context.go('/');
-                  }on FirebaseException catch (e){
+                    GoRouter.of(context).go('/');
+                  } on FirebaseException catch (e) {
                     if (e.code == 'weak-password') {
                       //use method toast
                       Fluttertoast.showToast(
@@ -283,8 +342,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           timeInSecForIosWeb: 1,
                           backgroundColor: Colors.grey,
                           textColor: Colors.black,
-                          fontSize: 16.0
-                      );
+                          fontSize: 16.0);
                     } else if (e.code == 'email-already-in-use') {
                       Fluttertoast.showToast(
                           msg: "email already in use",
@@ -293,8 +351,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           timeInSecForIosWeb: 1,
                           backgroundColor: Colors.grey,
                           textColor: Colors.black,
-                          fontSize: 16.0
-                      );
+                          fontSize: 16.0);
                     }
                   } catch (e) {
                     Fluttertoast.showToast(
@@ -304,13 +361,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.red,
                         textColor: Colors.white,
-                        fontSize: 16.0
-                    );
-
-
+                        fontSize: 16.0);
                   }
-
-
                 },
                 child: Text('Create New Account'),
                 color: Colors.greenAccent,

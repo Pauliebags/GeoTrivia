@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColor.pripmaryColor,
-        title: Text('Welcome'),
+        title: Text('Welcome to GeoTrivia'),
       ),
       backgroundColor: AppColor.pripmaryColor,
       body: Form(
@@ -177,7 +177,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  context.go('/CreateAccount');
+                  GoRouter.of(context).go('/CreateAccount');
                 },
                 child: Text('CreateAccount'),
                 style: ButtonStyle(),

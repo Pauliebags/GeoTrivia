@@ -40,6 +40,7 @@ dependencies:
   flag: ^6.0.0
   country_codes: ^2.2.0
   geocoding: ^2.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +65,6 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon.png"
+  image_path: "assets/images/geotrivia.jpg"
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/icon-adaptive-foreground.png"

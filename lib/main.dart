@@ -129,16 +129,14 @@ class MyApp extends StatelessWidget {
     initialLocation: '/signin',
     routes: [
       GoRoute(
-          path: '/ProfileScreen',
-          pageBuilder: (context, state) => buildMyTransition(
-                child: ProfileScreen(),
-                color: context.watch<Palette>().backgroundLevelSelection,
-              )),
-      GoRoute(
           path: '/CreateAccount',
           builder: (context, state) => CreateAccountScreen()),
-      // GoRoute(path: '/ForgotPassword', builder: (context,state)=>ForgotPasswordScreen()),
-      GoRoute(path: '/signin', builder: (context, state) => SignInScreen(),routes: []),
+
+      GoRoute(path: '/signin', builder: (context, state) => SignInScreen(),routes: [
+        GoRoute(
+            path: 'CreateAccount',
+            builder: (context, state) => CreateAccountScreen()),
+      ]),
       GoRoute(
           path: '/',
           builder: (context, state) =>
@@ -150,45 +148,19 @@ class MyApp extends StatelessWidget {
                       child:MainMenu(),
                       color: context.watch<Palette>().backgroundLevelSelection,
                     ),
-                // routes: [
-                //   GoRoute(
-                //     path: 'session/:level',
-                //     pageBuilder: (context, state) {
-                //       final levelNumber = int.parse(state.params['level']!);
-                //       final level = gameLevels
-                //           .singleWhere((e) => e.number == levelNumber);
-                //       return buildMyTransition(
-                //         child: PlaySessionScreen(
-                //           level,
-                //           key: const Key('play session'),
-                //         ),
-                //         color: context.watch<Palette>().backgroundPlaySession,
-                //       );
-                //     },
-                //   ),
-                //   GoRoute(
-                //     path: 'won',
-                //     pageBuilder: (context, state) {
-                //       final map = state.extra! as Map<String, dynamic>;
-                //       final score = map['score'] as Score;
-                //
-                //       return buildMyTransition(
-                //         child: WinGameScreen(
-                //           score: score,
-                //           key: const Key('win game'),
-                //         ),
-                //         color: context.watch<Palette>().backgroundPlaySession,
-                //       );
-                //     },
-                //   )
-                // ],
             ),
             GoRoute(
               path: 'settings',
               builder: (context, state) =>
                   const SettingsScreen(key: Key('settings')),
             ),
-            //GoRoute(path: '/signin',builder: (context,state)=>);
+            GoRoute(
+                path: 'ProfileScreen',
+                pageBuilder: (context, state) => buildMyTransition(
+                  child: ProfileScreen(),
+                  color: context.watch<Palette>().backgroundLevelSelection,
+                )),
+
           ]),
     ],
   );

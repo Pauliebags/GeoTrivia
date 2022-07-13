@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:game_template/src/Questions/screens/africa_quizz_screen.dart';
+import 'package:game_template/src/Questions/screens/euro_quizz_screen.dart';
 import 'package:game_template/src/Questions/screens/quizz_screen.dart';
 
 import '../ui/shared/color.dart';
+
 // Initial Selected Value
 dynamic dropdownvalue = 'Europe';
 // List of items in our dropdown menu
@@ -15,6 +18,7 @@ var items = [
   'Oceania',
   'World Flags',
 ];
+
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
 
@@ -36,6 +40,7 @@ class _MainMenuState extends State<MainMenu> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Spacer(),
             const Center(
               child: Text(
                 "GeoTrivia",
@@ -46,11 +51,22 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ),
             ),
-            Image.asset('assets/images/geotrivia.jpg' ,width: 300.0, height: 300.0),
-            Text('Pick your Quiz topic below!', style: TextStyle(color: Colors.white,fontSize: 30, fontWeight: FontWeight.bold
-            ),),
+            Image.asset('assets/images/geotrivia.jpg',
+                width: 300.0, height: 300.0),
+            Text(
+              'Pick your Quiz topic below!',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
             DropdownButton(
-              dropdownColor: Colors.black, style: TextStyle(color: Colors.white),
+              dropdownColor: Colors.black,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+              alignment: AlignmentDirectional.center,
               // Initial Value
               value: dropdownvalue,
 
@@ -68,7 +84,7 @@ class _MainMenuState extends State<MainMenu> {
               // change button value to selected value
               onChanged: (newValue) {
                 setState(() {
-                   dropdownvalue = newValue;
+                  dropdownvalue = newValue;
                 });
               },
             ),
@@ -77,13 +93,19 @@ class _MainMenuState extends State<MainMenu> {
                 child: RawMaterialButton(
                   onPressed: () {
                     //Navigating the the Quiz Screen
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QuizzScreen(
-                            quizzCountry: '',
-                          ),
-                        ));
+                    dropdownvalue == 'Europe'
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AfricaQuizzScreen(),
+                            ))
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizzScreen(
+                                quizzCountry: dropdownvalue,
+                              ),
+                            ));
                   },
                   shape: const StadiumBorder(),
                   fillColor: AppColor.secondaryColor,
@@ -111,11 +133,13 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ),
             ),
+            Spacer(),
           ],
         ),
       ),
     );
   }
 }
+
 /// Test6@gmail.com
 /// 123456Aa.1
