@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:game_template/src/settings/theme_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -13,11 +14,16 @@ import '../style/responsive_screen.dart';
 import 'custom_name_dialog.dart';
 import 'settings.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   static const _gap = SizedBox(height: 60);
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<SettingsController>();
@@ -28,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
       body: ResponsiveScreen(
         squarishMainArea: ListView(
           children: [
-            _gap,
+            SettingsScreen._gap,
             const Text(
               'Settings',
               textAlign: TextAlign.center,
@@ -38,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
                 height: 1,
               ),
             ),
-            _gap,
+            SettingsScreen._gap,
             const _NameChangeLine(
               'Name',
             ),
@@ -85,20 +91,15 @@ class SettingsScreen extends StatelessWidget {
                 onSelected: callback,
               );
             }),
-            _SettingsLine(
-              'Reset progress',
-              const Icon(Icons.delete),
-              onSelected: () {
-                context.read<PlayerProgress>().reset();
 
-                final messenger = ScaffoldMessenger.of(context);
-                messenger.showSnackBar(
-                  const SnackBar(
-                      content: Text('Player progress has been reset.')),
-                );
+            _SettingsLine(
+              'Light/Dark',
+              SwitchThemeMode(),
+              onSelected: () {
+
               },
             ),
-            _gap,
+            SettingsScreen._gap,
           ],
         ),
         rectangularMenuArea: ElevatedButton(
@@ -182,5 +183,26 @@ class _SettingsLine extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SwitchThemeMode extends StatefulWidget {
+  const SwitchThemeMode({Key? key}) : super(key: key);
+
+  @override
+  State<SwitchThemeMode> createState() => _SwitchThemeModeState();
+}
+
+class _SwitchThemeModeState extends State<SwitchThemeMode> {
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Switch.adaptive(value: themeProvider.isDarkMode,onChanged: (value){
+      setState((){
+        final provider = Provider.of<ThemeProvider>(context, listen: false);
+        provider.toggleTheme(value);
+      });
+
+    },);
   }
 }

@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       if (e.code == 'user-not-found') {
                         //use method toast
                         Fluttertoast.showToast(
-                            msg: "user not found",
+                            msg: "user not found ",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 1,

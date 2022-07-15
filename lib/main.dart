@@ -1,5 +1,7 @@
 // Uncomment the following lines when enabling Firebase Crashlytics
 // import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -10,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:game_template/src/Create_Account/Create_Account_Screen.dart';
 import 'package:game_template/src/Profile_Screen/Profile_Screen.dart';
 import 'package:game_template/src/Questions/screens/main_menu.dart';
+import 'package:game_template/src/settings/theme_provider.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
@@ -127,27 +130,47 @@ Logger _log = Logger('main.dart');
 class MyApp extends StatelessWidget {
   static final _router = GoRouter(
     initialLocation: '/signin',
+    redirect: (state) {
+      // final loggingIn = state.path == '/login';
+      // if (!loggedIn) return loggingIn ? null : '/login';
+      //
+      // // if the user is logged in but still on the login page, send them to
+      // // the home page
+      // if (loggingIn) return '/';
+      //
+      // // no need to redirect at all
+      // return null;
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+        } else {
+          print('User is signed in!');
+        }
+      });
+    },
     routes: [
       GoRoute(
           path: '/CreateAccount',
           builder: (context, state) => CreateAccountScreen()),
-
-      GoRoute(path: '/signin', builder: (context, state) => SignInScreen(),routes: [
-        GoRoute(
-            path: 'CreateAccount',
-            builder: (context, state) => CreateAccountScreen()),
-      ]),
+      GoRoute(
+          path: '/signin',
+          builder: (context, state) => SignInScreen(),
+          routes: [
+            GoRoute(
+                path: 'CreateAccount',
+                builder: (context, state) => CreateAccountScreen()),
+          ]),
       GoRoute(
           path: '/',
           builder: (context, state) =>
               const MainMenuScreen(key: Key('main menu')),
           routes: [
             GoRoute(
-                path: 'play',
-                pageBuilder: (context, state) => buildMyTransition(
-                      child:MainMenu(),
-                      color: context.watch<Palette>().backgroundLevelSelection,
-                    ),
+              path: 'play',
+              pageBuilder: (context, state) => buildMyTransition(
+                child: MainMenu(),
+                color: context.watch<Palette>().backgroundLevelSelection,
+              ),
             ),
             GoRoute(
               path: 'settings',
@@ -157,10 +180,9 @@ class MyApp extends StatelessWidget {
             GoRoute(
                 path: 'ProfileScreen',
                 pageBuilder: (context, state) => buildMyTransition(
-                  child: ProfileScreen(),
-                  color: context.watch<Palette>().backgroundLevelSelection,
-                )),
-
+                      child: ProfileScreen(),
+                      color: context.watch<Palette>().backgroundLevelSelection,
+                    )),
           ]),
     ],
   );
@@ -223,26 +245,33 @@ class MyApp extends StatelessWidget {
             dispose: (context, audio) => audio.dispose(),
           ),
           Provider(
+            create: (context) => ThemeProvider(),
+          ),
+          Provider(
             create: (context) => Palette(),
           ),
         ],
         child: Builder(builder: (context) {
           final palette = context.watch<Palette>();
+          final themeProvider = Provider.of<ThemeProvider>(context);
 
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: 'GeoTrivia',
-            theme: ThemeData.from(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: palette.darkPen,
-                background: palette.backgroundMain,
-              ),
-              textTheme: TextTheme(
-                bodyText2: TextStyle(
-                  color: palette.ink,
-                ),
-              ),
-            ),
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            // ThemeData.from(
+            //   colorScheme: ColorScheme.fromSeed(
+            //     seedColor: palette.darkPen,
+            //     background: palette.backgroundMain,
+            //   ),
+            //   textTheme: TextTheme(
+            //     bodyText2: TextStyle(
+            //       color: palette.ink,
+            //     ),
+            //   ),
+            // ),
             routeInformationParser: _router.routeInformationParser,
             routerDelegate: _router.routerDelegate,
             scaffoldMessengerKey: scaffoldMessengerKey,

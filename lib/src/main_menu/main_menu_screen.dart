@@ -11,6 +11,7 @@ import '../audio/audio_controller.dart';
 import '../audio/sounds.dart';
 import '../games_services/games_services.dart';
 import '../settings/settings.dart';
+import '../settings/theme_provider.dart';
 import '../style/palette.dart';
 import '../style/responsive_screen.dart';
 
@@ -23,9 +24,10 @@ class MainMenuScreen extends StatelessWidget {
     final gamesServicesController = context.watch<GamesServicesController?>();
     final settingsController = context.watch<SettingsController>();
     final audioController = context.watch<AudioController>();
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      backgroundColor: AppColor.pripmaryColor,
+      backgroundColor:themeProvider.isDarkMode?Colors.white: AppColor.pripmaryColor,
       body: ResponsiveScreen(
         mainAreaProminence: 0.45,
         squarishMainArea: Center(

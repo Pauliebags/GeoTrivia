@@ -43,13 +43,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text(data['CountryCode'],style: TextStyle(color: Colors.white),),
+              //  Text(data['CountryCode'],style: TextStyle(color: Colors.white),),
                 SizedBox(height: 5),
-                Flag.fromString(
-                  data['CountryCode'],
-                  height: 150,
-                  fit: BoxFit.fill,
-                ),
+                // Flag.fromString(
+                //   data['CountryCode'],
+                //   height: 150,
+                //   fit: BoxFit.fill,
+                // ),
                 Text(
                   'Full Name',
                   style: TextStyle(
@@ -161,20 +161,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    userEmail!.isNotEmpty ||
-                            userPhone!.isNotEmpty ||
-                            userName!.isNotEmpty
-                        ? Fluttertoast.showToast(
-                            msg: "weak password",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.grey,
-                            textColor: Colors.black,
-                            fontSize: 16.0)
-                        : Container();
+                    FirebaseAuth.instance.signOut();
                   },
-                  child: Text('Update'),
+                  child: Text('Sign Out'),
                   color: Colors.red,
                 ),
               ],
