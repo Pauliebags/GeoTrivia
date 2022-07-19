@@ -1,8 +1,6 @@
 // Uncomment the following lines when enabling Firebase Crashlytics
 // import 'dart:io';
 
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
@@ -45,7 +43,7 @@ import 'src/style/palette.dart';
 import 'src/style/snack_bar.dart';
 import 'src/win_game/win_game_screen.dart';
 
-  bool? result ;
+bool? result;
 Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   // To enable Firebase Crashlytics, uncomment the following lines and
@@ -146,25 +144,26 @@ class MyApp extends StatelessWidget {
     });
   }
 
-  static final _router = GoRouter(
-    initialLocation:!result!? '/signin' :'/',
+   static final _router = GoRouter(
+    initialLocation: !result! ? '/signin' : '/',
+    errorBuilder: (context, state) => Scaffold(
+      appBar: AppBar(),
+    ),
+    errorPageBuilder: (context, state) => MaterialPage<void>(
+      key: state.pageKey,
+      child: Scaffold(
+        appBar: AppBar(),
+      ),
+    ),
     debugLogDiagnostics: true,
-    // redirect: (state) {
-    //    final loggingIn = state.path == '/signin';
-    //   // if (!loggedIn) return loggingIn ? null : '/login';
-    //   //
-    //   // // if the user is logged in but still on the login page, send them to
-    //   // // the home page
-    //   // if (loggingIn) return '/';
-    //   //
-    //   // // no need to redirect at all
-    //   // return null;
-    //   if (!true && !loggingIn) return '/signin';
-    //   if (true && loggingIn) return '/';
-    //
-    //   return null;
-    // },
     routes: [
+      GoRoute(
+          path: '/error',
+          builder: (context, state) => Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )),
       GoRoute(
           path: '/ForgotPassword',
           builder: (context, state) => ForgotPasswordScreen()),
