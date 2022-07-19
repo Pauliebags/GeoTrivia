@@ -24,11 +24,19 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState((){});
+  }
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<SettingsController>();
     final palette = context.watch<Palette>();
-
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    setState((){});
     return Scaffold(
       backgroundColor: palette.backgroundSettings,
       body: ResponsiveScreen(
@@ -91,13 +99,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onSelected: callback,
               );
             }),
-
             _SettingsLine(
               'Light/Dark',
-              SwitchThemeMode(),
-              onSelected: () {
-
-              },
+              SwitchThemeMode(themeProvider: themeProvider),
+              onSelected: () {},
             ),
             SettingsScreen._gap,
           ],
@@ -110,6 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+    setState((){});
   }
 }
 
@@ -150,7 +156,9 @@ class _NameChangeLine extends StatelessWidget {
         ),
       ),
     );
+
   }
+
 }
 
 class _SettingsLine extends StatelessWidget {
@@ -183,11 +191,14 @@ class _SettingsLine extends StatelessWidget {
         ),
       ),
     );
+
   }
+
 }
 
 class SwitchThemeMode extends StatefulWidget {
-  const SwitchThemeMode({Key? key}) : super(key: key);
+  final themeProvider;
+  const SwitchThemeMode({this.themeProvider, Key? key}) : super(key: key);
 
   @override
   State<SwitchThemeMode> createState() => _SwitchThemeModeState();
@@ -196,13 +207,17 @@ class SwitchThemeMode extends StatefulWidget {
 class _SwitchThemeModeState extends State<SwitchThemeMode> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    return Switch.adaptive(value: themeProvider.isDarkMode,onChanged: (value){
-      setState((){
-        final provider = Provider.of<ThemeProvider>(context, listen: false);
-        provider.toggleTheme(value);
-      });
+    return Switch.adaptive(
+      value: widget.themeProvider.isDarkMode,
+      onChanged: (value) {
+        setState((){
+          final provider = Provider.of<ThemeProvider>(context, listen: false);
+          provider.toggleTheme(value);
 
-    },);
+        });
+
+      },
+    );
   }
+
 }

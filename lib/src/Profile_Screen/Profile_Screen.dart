@@ -5,6 +5,7 @@ import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:game_template/src/Questions/ui/shared/color.dart';
+import 'package:go_router/go_router.dart';
 
 FirebaseAuth user = FirebaseAuth.instance;
 String? userName;
@@ -162,6 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialButton(
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
+                    context.go('/signin');
                   },
                   child: Text('Sign Out'),
                   color: Colors.red,
