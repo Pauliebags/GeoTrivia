@@ -90,6 +90,13 @@ class MainMenuScreen extends StatelessWidget {
               },
               child: const Text('Profile'),
             ),
+            _gap,
+            ElevatedButton(
+              onPressed: () {
+                GoRouter.of(context).go('/leaderBoard');
+              },
+              child: const Text('Leaderboards'),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 32),
               child: ValueListenableBuilder<bool>(
@@ -102,6 +109,7 @@ class MainMenuScreen extends StatelessWidget {
                 },
               ),
             ),
+
             _gap,
           ],
         ),

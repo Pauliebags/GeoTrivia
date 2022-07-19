@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:game_template/src/Questions/screens/main_menu.dart';
 
 import '../ui/shared/color.dart';
 
+FirebaseAuth _user = FirebaseAuth.instance;
 
 class ResultScreen extends StatefulWidget {
-  int score;
+  final int score;
   ResultScreen(this.score, {Key? key}) : super(key: key);
 
   @override
@@ -16,6 +19,13 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
+    print(widget.score);
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(_user.currentUser!.uid)
+        .update({
+      'Point': widget.score,
+    });
     return Scaffold(
       backgroundColor: AppColor.pripmaryColor,
       body: Column(
@@ -67,7 +77,7 @@ class _ResultScreenState extends State<ResultScreen> {
             color: AppColor.secondaryColor,
             padding: EdgeInsets.all(18.0),
             child: Text(
-              "Reapeat the quizz",
+              "Repeat the quiz",
               style: TextStyle(color: Colors.white),
             ),
           ),

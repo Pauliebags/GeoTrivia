@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                Text(data['UserPhone'].toString()),
+
                 Text(
                   'Email',
                   style: TextStyle(

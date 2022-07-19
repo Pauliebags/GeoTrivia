@@ -5,6 +5,8 @@ import 'model/question_model.dart';
 List<QuestionModel> naQuestions=[
 
         QuestionModel(
+              flag: Flag.fromCode(
+                  FlagsCode.KI,height: 100,width: double.infinity),
             question:
       "What is the tallest mountain in the North America?",
 answers: {

@@ -328,6 +328,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       'UserEmail': emailaddress.text,
                       'UserCountry': placemarks[0].country,
                       'CountryCode': deviceLocale!.countryCode,
+                      'Point':0,
                     });
                     //// after save the value go to main screen (the root)
                     //// use Go_Router Function to go to this screen

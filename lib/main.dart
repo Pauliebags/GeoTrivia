@@ -18,6 +18,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
+import 'src/Forgot_Password/Forgot_Password_Screen.dart';
 import 'src/ads/ads_controller.dart';
 import 'src/app_lifecycle/app_lifecycle.dart';
 import 'src/audio/audio_controller.dart';
@@ -25,6 +26,7 @@ import 'src/crashlytics/crashlytics.dart';
 import 'src/games_services/games_services.dart';
 import 'src/games_services/score.dart';
 import 'src/in_app_purchase/in_app_purchase.dart';
+import 'src/leaderboard/leaderboard_screen.dart';
 import 'src/level_selection/level_selection_screen.dart';
 import 'src/level_selection/levels.dart';
 import 'src/main_menu/main_menu_screen.dart';
@@ -42,6 +44,7 @@ import 'src/style/snack_bar.dart';
 import 'src/win_game/win_game_screen.dart';
 
 Future<void> main() async {
+  Provider.debugCheckInvalidValueType = null;
   // To enable Firebase Crashlytics, uncomment the following lines and
   // the import statements at the top of this file.
   // See the 'Crashlytics' section of the main README.md file for details.
@@ -149,6 +152,7 @@ class MyApp extends StatelessWidget {
       });
     },
     routes: [
+      GoRoute(path: '/ForgotPassword',builder: (context,state)=> ForgotPasswordScreen()),
       GoRoute(
           path: '/CreateAccount',
           builder: (context, state) => CreateAccountScreen()),
@@ -159,6 +163,7 @@ class MyApp extends StatelessWidget {
             GoRoute(
                 path: 'CreateAccount',
                 builder: (context, state) => CreateAccountScreen()),
+
           ]),
       GoRoute(
           path: '/',
@@ -183,6 +188,9 @@ class MyApp extends StatelessWidget {
                       child: ProfileScreen(),
                       color: context.watch<Palette>().backgroundLevelSelection,
                     )),
+            GoRoute(path: 'leaderBoard',
+              builder:(context, state) => LeaderBoard(),
+            ),
           ]),
     ],
   );

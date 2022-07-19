@@ -6,6 +6,9 @@ import 'package:game_template/src/Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
+import '../settings/settings.dart';
 bool _passwordInVisible = true; //a boolean value
 final formkey = GlobalKey<FormState>();
 TextEditingController userName = TextEditingController();
@@ -19,13 +22,27 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   @override
   Widget build(BuildContext context) {
+    final settingsController = context.watch<SettingsController>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColor.pripmaryColor,
         title: Text('Welcome to GeoTrivia'),
+        actions: [
+          ValueListenableBuilder<bool>(
+            valueListenable: settingsController.muted,
+            builder: (context, muted, child) {
+              return IconButton(
+                onPressed: () => settingsController.toggleMuted(),
+                icon: Icon(muted ? Icons.volume_off : Icons.volume_up),
+              );
+            },
+          ),
+
+        ],
       ),
       backgroundColor: AppColor.pripmaryColor,
       body: Form(
@@ -184,7 +201,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  //  context.go('/ForgotPassword');
+                   GoRouter.of(context).go('/ForgotPassword');
                 },
                 child: Text('ForgotPassword'),
                 style: ButtonStyle(),

@@ -10,13 +10,14 @@ import '../ui/shared/color.dart';
 dynamic dropdownvalue = 'Europe';
 // List of items in our dropdown menu
 var items = [
-  'Europe',
+
   'North America',
   'South America',
   'Africa',
   'Asia',
   'Oceania',
   'World Flags',
+  'Europe',
 ];
 
 class MainMenu extends StatefulWidget {

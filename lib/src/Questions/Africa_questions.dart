@@ -43,6 +43,8 @@ answers: {
 "Mount Kilimanjaro": true,
 }),
 
+
+
 QuestionModel(
 question:
 "In which country is the Kalahari Desert?",
@@ -53,6 +55,8 @@ answers: {
 "Mozambique": false,
 }),
 
+
+
 QuestionModel(
 question:
 "Which mountain range stretches across Algeria and Morocco?",
@@ -61,8 +65,7 @@ answers: {
 "Atlas Mountains": true,
 "Virunga Mountains": false,
 "Simien Mountains": false,
-}
-),
+}),
 
 QuestionModel(
 question:
@@ -101,6 +104,6 @@ answers: {
 "Sugar Cane": false,
 "Cotton": true,
 "Coffee Beans": false,
-}
-),
-];
+}),
+
+ ];

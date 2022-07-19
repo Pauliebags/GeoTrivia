@@ -7,6 +7,7 @@ import 'package:game_template/src/Questions/Europe_Questions.dart';
 import 'package:game_template/src/Questions/North_America_Questions.dart';
 import 'package:game_template/src/Questions/Oceania_Questions.dart';
 import 'package:game_template/src/Questions/South_America_Questions.dart';
+import 'package:game_template/src/Questions/flag_question_template.dart';
 import 'package:game_template/src/Questions/screens/result_screen.dart';
 
 import '../data/questions_example.dart';
@@ -15,6 +16,8 @@ import '../ui/shared/color.dart';
 int score = 0;
 bool btnPressed = false;
 bool answered = true;
+String btnText = "Next Question";
+
 class QuizzScreen extends StatefulWidget {
   String quizzCountry;
   QuizzScreen({required this.quizzCountry, Key? key}) : super(key: key);
@@ -27,7 +30,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
   int question_pos = 0;
 
   PageController? _controller;
-  String btnText = "Next Question";
 
   @override
   void initState() {
@@ -38,7 +40,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.quizzCountry);
+
     return Scaffold(
       backgroundColor: AppColor.pripmaryColor,
       body: Padding(
@@ -47,24 +49,26 @@ class _QuizzScreenState extends State<QuizzScreen> {
               controller: _controller!,
               onPageChanged: (page) {
                 widget.quizzCountry == 'Europe'
-                    ?page == euQuestions.length - 1
+                    ? page == euQuestions.length - 1
                     : widget.quizzCountry == 'North America'
                         ? page == naQuestions.length - 1
                         : widget.quizzCountry == 'Oceania'
-                            ? page ==ocQuestions.length - 1
+                            ? page == ocQuestions.length - 1
                             : widget.quizzCountry == 'Asia'
-                                ? page ==asQuestions.length - 1
+                                ? page == asQuestions.length - 1
                                 : widget.quizzCountry == 'Africa'
-                                    ?page == afQuestions.length - 1
+                                    ? page == afQuestions.length - 1
                                     : widget.quizzCountry == 'South America'
-                                        ?page == saQuestions.length - 1
-                                        : page == questions.length - 1
-                                            ? setState(() {
-                                                btnText = "See Results";
-                                              })
-                                            : setState(() {
-                                                answered = false;
-                                              });
+                                        ? page == saQuestions.length - 1
+                                        : widget.quizzCountry == 'World Flags'
+                                            ? page == flQuestions.length - 1
+                                            : page == questions.length - 1
+                                                ? setState(() {
+                                                    btnText = "See Results";
+                                                  })
+                                                : setState(() {
+                                                    answered = false;
+                                                  });
               },
               physics: new NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
@@ -111,9 +115,15 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                             ? saQuestions[index].flag == null
                                                 ? Container()
                                                 : saQuestions[index].flag
-                                            : questions[index].flag == null
-                                                ? Container()
-                                                : questions[index].flag,
+                                            : widget.quizzCountry ==
+                                                    'World Flags'
+                                                ? flQuestions[index].flag ==
+                                                        null
+                                                    ? Container()
+                                                    : flQuestions[index].flag
+                                                : questions[index].flag == null
+                                                    ? Container()
+                                                    : questions[index].flag,
                     SizedBox(
                       height: 10.0,
                     ),
@@ -121,7 +131,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                       width: double.infinity,
                       height: 200.0,
                       child: Text(
-                        "${widget.quizzCountry == 'Europe' ? euQuestions[index].question : widget.quizzCountry == 'North America' ? naQuestions[index].question : widget.quizzCountry == 'Oceania' ? ocQuestions[index].question : widget.quizzCountry == 'Asia' ? asQuestions[index].question : widget.quizzCountry == 'Africa' ? afQuestions[index].question : widget.quizzCountry == 'South America' ? saQuestions[index].question : questions[index].question}",
+                        "${widget.quizzCountry == 'Europe' ? euQuestions[index].question : widget.quizzCountry == 'North America' ? naQuestions[index].question : widget.quizzCountry == 'Oceania' ? ocQuestions[index].question : widget.quizzCountry == 'Asia' ? asQuestions[index].question : widget.quizzCountry == 'Africa' ? afQuestions[index].question : widget.quizzCountry == 'South America' ? saQuestions[index].question : widget.quizzCountry == 'World Flags' ? flQuestions[index].question : questions[index].question}",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
@@ -141,8 +151,14 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                         : widget.quizzCountry == 'South America'
                                             ? BuildQ(
                                                 quesIndex: saQuestions[index])
-                                            : BuildQ(
-                                                quesIndex: questions[index]),
+                                            : widget.quizzCountry ==
+                                                    'World Flags'
+                                                ? BuildQ(
+                                                    quesIndex:
+                                                        flQuestions[index])
+                                                : BuildQ(
+                                                    quesIndex:
+                                                        questions[index]),
                     SizedBox(
                       height: 40.0,
                     ),
@@ -150,7 +166,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                       onPressed: () {
                         if (_controller!.page?.toInt() ==
                             questions.length - 1) {
-
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -190,7 +205,9 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                   ? afQuestions.length
                                   : widget.quizzCountry == 'South America'
                                       ? saQuestions.length
-                                      : questions.length)),
+                                      : widget.quizzCountry == 'World Flags'
+                                          ? flQuestions.length
+                                          : questions.length)),
     );
   }
 }
@@ -204,8 +221,6 @@ class BuildQ extends StatefulWidget {
 }
 
 class _BuildQState extends State<BuildQ> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -226,8 +241,6 @@ class _BuildQState extends State<BuildQ> {
                   : AppColor.secondaryColor,
               onPressed: answered
                   ? () {
-
-
                       if (widget.quesIndex.answers!.values.toList()[i]) {
                         score++;
                         print("yes");
