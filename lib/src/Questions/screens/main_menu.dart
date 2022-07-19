@@ -93,14 +93,8 @@ class _MainMenuState extends State<MainMenu> {
               child: Center(
                 child: RawMaterialButton(
                   onPressed: () {
-                    //Navigating the the Quiz Screen
-                    dropdownvalue == 'Europe'
-                        ? Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AfricaQuizzScreen(),
-                            ))
-                        : Navigator.push(
+
+                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => QuizzScreen(
