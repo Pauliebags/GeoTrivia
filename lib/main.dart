@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:game_template/src/Create_Account/Create_Account_Screen.dart';
 import 'package:game_template/src/Profile_Screen/Profile_Screen.dart';
 import 'package:game_template/src/Questions/screens/main_menu.dart';
+import 'package:game_template/src/landing_screen/landing_screen.dart';
 import 'package:game_template/src/settings/theme_provider.dart';
 import 'package:game_template/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -132,20 +133,10 @@ void guardedMain() {
 Logger _log = Logger('main.dart');
 
 class MyApp extends StatelessWidget {
-  userChange() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-        result = false;
-      } else {
-        print('User is signed in!');
-        result = true;
-      }
-    });
-  }
+
 
    static final _router = GoRouter(
-    initialLocation: '/signin',
+    initialLocation: '/landingscreen',
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(),
     ),
@@ -157,6 +148,7 @@ class MyApp extends StatelessWidget {
     ),
     debugLogDiagnostics: true,
     routes: [
+      GoRoute(path: '/landingscreen',builder:(context, state) => LandingScreen() ),
       GoRoute(
           path: '/error',
           builder: (context, state) => Scaffold(
@@ -230,7 +222,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    userChange();
+
     return AppLifecycleObserver(
       child: MultiProvider(
         providers: [

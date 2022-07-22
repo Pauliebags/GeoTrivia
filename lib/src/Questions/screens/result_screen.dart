@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:game_template/src/Questions/screens/main_menu.dart';
 
+import '../../main_menu/main_menu_screen.dart';
 import '../ui/shared/color.dart';
 
 FirebaseAuth _user = FirebaseAuth.instance;
@@ -78,6 +79,25 @@ class _ResultScreenState extends State<ResultScreen> {
             padding: EdgeInsets.all(18.0),
             child: Text(
               "Repeat the quiz",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainMenuScreen(),
+                  ));
+            },
+            shape: StadiumBorder(),
+            color: AppColor.secondaryColor,
+            padding: EdgeInsets.all(18.0),
+            child: Text(
+              "Home Page",
               style: TextStyle(color: Colors.white),
             ),
           ),

@@ -87,42 +87,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                Text(
-                  'Phone Number',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Enter your email address';
-                          }
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            userPhone = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: data['UserPhone'].toString(),
-                          hintStyle: TextStyle(color: Colors.black),
-                          filled: true,
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                  ),
-                ),
 
                 Text(
                   'Email',

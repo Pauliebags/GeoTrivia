@@ -6,7 +6,7 @@ import 'model/question_model.dart';
 
 List<QuestionModel> flQuestions = [
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.KI, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.KI, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Singapore": false,
@@ -15,7 +15,7 @@ List<QuestionModel> flQuestions = [
         "Uruguay": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.GB, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.GB,height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Australia": false,
@@ -24,7 +24,7 @@ List<QuestionModel> flQuestions = [
         "New Zealand": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.IN, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.IN, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "India": true,
@@ -33,7 +33,7 @@ List<QuestionModel> flQuestions = [
         "Turkey": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.DE, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.DE, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Belgium": false,
@@ -42,7 +42,7 @@ List<QuestionModel> flQuestions = [
         "Norway": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.GE, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.GE, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "England": false,
@@ -51,7 +51,7 @@ List<QuestionModel> flQuestions = [
         "Georgia": true,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.FI, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.FI,height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Greece": false,
@@ -60,7 +60,7 @@ List<QuestionModel> flQuestions = [
         "Scotland": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.MX, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.MX,height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Mexico": true,
@@ -69,7 +69,7 @@ List<QuestionModel> flQuestions = [
         "Brazil": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.KR, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.KR, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "South Korea": true,
@@ -78,7 +78,7 @@ List<QuestionModel> flQuestions = [
         "Vietnam": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.ES, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.ES, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Albania": false,
@@ -87,7 +87,7 @@ List<QuestionModel> flQuestions = [
         "Algeria": false,
       }),
   QuestionModel(
-      flag: Flag.fromCode(FlagsCode.CA, height: 100, width: double.infinity),
+      flag: Flag.fromCode(FlagsCode.CA, height: 150, width: double.infinity),
       question: "Which country's flag is this?",
       answers: {
         "Canada": true,

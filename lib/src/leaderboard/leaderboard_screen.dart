@@ -26,7 +26,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
             return const Text("Loading");
           }
 
-          var data = snap.data.docs.toList();
+          List data = snap.data.docs.toList();
+          data.sort((a, b) => b['Point'].compareTo(a['Point']));
           return DataTable(columnSpacing: 170, dataRowHeight: 100, columns: [
             DataColumn(
                 label: Text(

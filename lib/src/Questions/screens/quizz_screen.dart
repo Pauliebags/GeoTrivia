@@ -124,9 +124,9 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                                 : questions[index].flag == null
                                                     ? Container()
                                                     : questions[index].flag,
-                    SizedBox(
-                      height: 10.0,
-                    ),
+                    // SizedBox(
+                    //   height: 10.0,
+                    // ),
                     SizedBox(
                       width: double.infinity,
                       height: 200.0,
@@ -159,9 +159,9 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                                 : BuildQ(
                                                     quesIndex:
                                                         questions[index]),
-                    SizedBox(
-                      height: 40.0,
-                    ),
+                    // SizedBox(
+                    //   height: 40.0,
+                    // ),
                     RawMaterialButton(
                       onPressed: () {
                         if (_controller!.page?.toInt() ==
@@ -190,6 +190,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                       ),
                     ),
                     Spacer(),
+
                   ],
                 );
               },
@@ -228,7 +229,7 @@ class _BuildQState extends State<BuildQ> {
         for (int i = 0; i < widget.quesIndex.answers!.length; i++)
           Container(
             width: double.infinity,
-            height: 50.0,
+            height: 35.0,
             margin: EdgeInsets.only(bottom: 20.0, left: 12.0, right: 12.0),
             child: RawMaterialButton(
               shape: RoundedRectangleBorder(

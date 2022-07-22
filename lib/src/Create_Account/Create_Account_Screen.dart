@@ -319,7 +319,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   try {
                     await FirebaseAuth.instance.createUserWithEmailAndPassword(
                         email: emailaddress.text,
-                        password: confirmpassword.text);
+                        password: confirmpassword.text).then((value) =>Fluttertoast.showToast(
+                        msg:"Account Successfully Created",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.black,
+                        fontSize: 16.0) );
                     firestore
                         .collection('Users')
                         .doc(user.currentUser!.uid)

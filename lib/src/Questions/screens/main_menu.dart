@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:game_template/src/Questions/screens/africa_quizz_screen.dart';
-import 'package:game_template/src/Questions/screens/euro_quizz_screen.dart';
+
 import 'package:game_template/src/Questions/screens/quizz_screen.dart';
 
 import '../ui/shared/color.dart';
