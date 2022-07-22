@@ -26,6 +26,7 @@ question: "How many landlocked countries are there in Asia?",
 answers: {
 "7": false,
  "12": true,
+ "15": false,
  "18": false,
  }),
 

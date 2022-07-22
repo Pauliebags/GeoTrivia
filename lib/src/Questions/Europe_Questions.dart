@@ -9,7 +9,7 @@ List<QuestionModel> euQuestions = [
       "Danube": false,
       "Thames": false,
       "Volga": true,
-      "Thames": false,
+      "Clyde": false,
     }),
 
   QuestionModel(

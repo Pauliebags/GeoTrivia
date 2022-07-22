@@ -47,9 +47,9 @@ answers: {
 
 QuestionModel(
 question:
-"In which country is the Kalahari Desert?",
+"In which country is the majority of the Kalahari Desert?",
 answers: {
-"Botswana": false,
+"Botswana": true,
 "Sierra Leone": false,
 "South Africa": false,
 "Mozambique": false,

@@ -145,7 +145,7 @@ class MyApp extends StatelessWidget {
   }
 
    static final _router = GoRouter(
-    initialLocation: !result! ? '/signin' : '/',
+    initialLocation: '/signin',
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(),
     ),
