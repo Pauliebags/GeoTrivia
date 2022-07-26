@@ -259,10 +259,8 @@ class MyApp extends StatelessWidget {
             },
             dispose: (context, audio) => audio.dispose(),
           ),
-          Provider(
-            lazy: true,
-            create: (context) => ThemeProvider(),
-          ),
+          ChangeNotifierProvider(create: (context)=>ThemeProvider()),
+
           Provider(
             create: (context) => Palette(),
           ),

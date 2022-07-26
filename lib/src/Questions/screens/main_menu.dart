@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:game_template/src/Questions/screens/quizz_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../settings/theme_provider.dart';
 import '../ui/shared/color.dart';
 
 // Initial Selected Value
@@ -29,8 +31,9 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: AppColor.pripmaryColor,
+      backgroundColor:themeProvider.isDarkMode?Colors.black: AppColor.pripmaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 48.0,

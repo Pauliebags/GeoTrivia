@@ -24,20 +24,23 @@ class MainMenuScreen extends StatelessWidget {
     final gamesServicesController = context.watch<GamesServicesController?>();
     final settingsController = context.watch<SettingsController>();
     final audioController = context.watch<AudioController>();
+    ////////// before return
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      backgroundColor:themeProvider.isDarkMode?Colors.white: AppColor.pripmaryColor,
+      ///// and if you have const in this widget delete this const
+      ////themeProvider.isDarkMode?
+      backgroundColor:themeProvider.isDarkMode?Colors.black: AppColor.pripmaryColor,
       body: ResponsiveScreen(
         mainAreaProminence: 0.45,
         squarishMainArea: Center(
           child: Transform.rotate(
             angle: -0.1,
-            child: const Text(
+            child:  Text(
               'GeoTrivia!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF117eeb),
+                color: themeProvider.isDarkMode?Colors.yellow: Color(0xFF117eeb),
                 fontFamily: 'Permanent Marker',
                 fontSize: 55,
                 height: 1,
