@@ -1,17 +1,12 @@
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../model/question_model.dart';
 import '../ui/shared/color.dart';
-
-
 Widget questionWidget(
     QuestionModel questionModel, void Function() function, bool presed) {
   return Column(
     children: [
-
-
       SizedBox(
         width: double.infinity,
         height: 200.0,

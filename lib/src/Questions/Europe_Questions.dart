@@ -1,17 +1,14 @@
 import 'model/question_model.dart';
-
 List<QuestionModel> euQuestions = [
   QuestionModel(
     question:
     "What is Europe's longest river?",
     answers: {
-
       "Danube": false,
       "Thames": false,
       "Volga": true,
       "Clyde": false,
     }),
-
   QuestionModel(
     question: "What is the tallest mountain in Europe?",
     answers: {

@@ -27,14 +27,9 @@ dependencies:
 
   firebase_auth: ^3.4.1
   fluttertoast:
-  # If you don't need one of the following dependencies,
-  # delete the relevant line below, and get rid of any Dart code
-  # that references the dependency.
   firebase_core: ^1.15.0  # Needed for Crashlytics below
   firebase_crashlytics: ^2.8.1  # Error reporting
   games_services: ^2.0.7  # Achievements and leaderboards
-  google_mobile_ads: ^1.1.0  # Ads
-  in_app_purchase: ^3.0.1  # In-app purchases
   cloud_firestore: ^3.2.1
   geolocator: ^9.0.0
   flag: ^6.0.0

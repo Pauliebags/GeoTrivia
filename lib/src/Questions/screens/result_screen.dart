@@ -3,20 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:game_template/src/Questions/screens/main_menu.dart';
-
 import '../../main_menu/main_menu_screen.dart';
 import '../ui/shared/color.dart';
-
 FirebaseAuth _user = FirebaseAuth.instance;
-
 class ResultScreen extends StatefulWidget {
   final int score;
   ResultScreen(this.score, {Key? key}) : super(key: key);
-
   @override
   _ResultScreenState createState() => _ResultScreenState();
 }
-
 class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {

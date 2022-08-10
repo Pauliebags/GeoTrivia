@@ -6,51 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:game_template/src/Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
-
 FirebaseAuth user = FirebaseAuth.instance;
 String? userName;
 String? userPhone;
 String? userEmail;
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.pripmaryColor,
+        backgroundColor: AppColor.secondaryColor,
         centerTitle: true,
         title: Text('Profile Screen'),
       ),
-      backgroundColor: AppColor.pripmaryColor,
+      backgroundColor: AppColor.secondaryColor,
       body: StreamBuilder<dynamic>(
-        //the root inside firestore
         stream: FirebaseFirestore.instance
             .collection('Users')
             .doc(user.currentUser!.uid)
             .snapshots(),
-
-        /// you get the dat by the builder => snap
         builder: (context, dynamic snap) {
           var data = snap.data!.data();
-
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-              //  Text(data['CountryCode'],style: TextStyle(color: Colors.white),),
                 SizedBox(height: 5),
-                // Flag.fromString(
-                //   data['CountryCode'],
-                //   height: 150,
-                //   fit: BoxFit.fill,
-                // ),
                 Text(
                   'Full Name',
                   style: TextStyle(
@@ -87,7 +73,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
                 Text(
                   'Email',
                   style: TextStyle(

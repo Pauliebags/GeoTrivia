@@ -1,9 +1,7 @@
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'model/question_model.dart';
-
 List<QuestionModel> naQuestions=[
-
         QuestionModel(
               flag: Flag.fromCode(
                   FlagsCode.KI,height: 100,width: double.infinity),

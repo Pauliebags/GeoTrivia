@@ -3,23 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-
 import '../Questions/ui/shared/color.dart';
-
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
-
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
-
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final formkey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         leading: IconButton(onPressed: ()=>context.go('/signin'), icon: Icon(Icons.arrow_back)),
         centerTitle: true,
@@ -76,8 +71,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   height: 35,
                   color: Color(0xFF801E48),
                   onPressed: () async {
-                    //  context.go('/');
-
                     if (!formkey.currentState!.validate()) {
                       return;
                     }
@@ -88,26 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           .then((value) => context.go('/signin'));
                     } on FirebaseException catch (e) {
                       if (e.code == 'user-not-found') {
-                        //use method toast
-                        // Fluttertoast.showToast(
-                        //     msg: "user not found ",
-                        //     toastLength: Toast.LENGTH_SHORT,
-                        //     gravity: ToastGravity.BOTTOM,
-                        //     timeInSecForIosWeb: 1,
-                        //     backgroundColor: Colors.grey,
-                        //     textColor: Colors.black,
-                        //     fontSize: 16.0
-                        // );
                       } else if (e.code == 'wrong-password') {
-                        // Fluttertoast.showToast(
-                        //     msg: "Wrong Password",
-                        //     toastLength: Toast.LENGTH_SHORT,
-                        //     gravity: ToastGravity.BOTTOM,
-                        //     timeInSecForIosWeb: 1,
-                        //     backgroundColor: Colors.grey,
-                        //     textColor: Colors.black,
-                        //     fontSize: 16.0
-                        // );
                       }
                     } catch (e) {
                       Fluttertoast.showToast(
@@ -120,8 +94,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           fontSize: 16.0
                       );
                     }
-
-
                   },
                   child: Text('Forgot Password'),
                 ),

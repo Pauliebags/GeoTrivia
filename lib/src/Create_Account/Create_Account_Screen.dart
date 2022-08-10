@@ -12,8 +12,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 bool checkPolicy =false;
-bool _passwordInVisible = true; //a boolean value
-bool _confirmpasswordInVisible = true; //a boolean value
+bool _passwordInVisible = true; 
+bool _confirmpasswordInVisible = true; 
 final formkey = GlobalKey<FormState>();
 Position? gp;
 var cl;
@@ -26,7 +26,6 @@ TextEditingController emailaddress = TextEditingController();
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 FirebaseAuth user = FirebaseAuth.instance;
 RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
-//A function that validate user entered password
 bool validatePassword(String pass) {
   String _password = pass.trim();
   if (pass_valid.hasMatch(_password)) {
@@ -35,20 +34,15 @@ bool validatePassword(String pass) {
     return false;
   }
 }
-
 Future<Position> getPostion() async {
   return await Geolocator.getCurrentPosition().then((value) => value);
 }
-
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
-
   @override
   State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
-
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
-
   @override
   Widget build(BuildContext context) {
     final settingsController = context.watch<SettingsController>();
@@ -70,7 +64,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 );
               },
             ),
-
         ],
       ),
       backgroundColor: AppColor.pripmaryColor,
@@ -84,8 +77,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
               Image.asset('assets/images/geotrivia.jpg',
                   width: 150.0, height: 150.0),
-
-              /// username
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -112,8 +103,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
-
-              /// password
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -128,10 +117,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         if (value!.isEmpty) {
                           return 'Please Enter your password';
                         } else {
-                          //call function to check password
                           bool result = validatePassword(value);
                           if (result) {
-                            // create account event
                             return null;
                           } else {
                             return " Password should contain Capital, small letter & Number & Special";
@@ -145,13 +132,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             _passwordInVisible
                                 ? Icons.visibility_off
                                 : Icons
-                                    .visibility, //change icon based on boolean value
+                                    .visibility, 
                             color: Theme.of(context).primaryColorDark,
                           ),
                           onPressed: () {
                             setState(() {
                               _passwordInVisible =
-                                  !_passwordInVisible; //change boolean value
+                                  !_passwordInVisible; 
                             });
                           },
                         ),
@@ -165,8 +152,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
-
-              /// confirm password
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -192,13 +177,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             _confirmpasswordInVisible
                                 ? Icons.visibility_off
                                 : Icons
-                                    .visibility, //change icon based on boolean value
+                                    .visibility, 
                             color: Theme.of(context).primaryColorDark,
                           ),
                           onPressed: () {
                             setState(() {
                               _confirmpasswordInVisible =
-                                  !_confirmpasswordInVisible; //change boolean value
+                                  !_confirmpasswordInVisible; 
                             });
                           },
                         ),
@@ -212,8 +197,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
-
-              /// email address
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -249,7 +232,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 },
                 title: Text('GDPR policy accept'),
               ),
-              ///// GET LOCATION FROM HERE
               MaterialButton(
                 onPressed: () async {
                   bool isLocationServiceEnabled =
@@ -268,38 +250,24 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   per = await Geolocator.checkPermission();
                   if (per == LocationPermission.denied) {
                     per = await Geolocator.requestPermission();
-                    //   if (per == LocationPermission.always) {
-                    /////Get Postion
-                    // cl = await getPostion();
-                    // print(cl!.latitude);
-                    // print(cl!.longitude);
-                    //     }
                   }
                   gp = await getPostion();
-
-                  // print(per);
                   placemarks = await placemarkFromCoordinates(
                       gp!.latitude, gp!.longitude);
                   await CountryCodes
-                      .init(); // Optionally, you may provide a `Locale` to get countrie's localizadName
-
+                      .init(); 
                   deviceLocale = CountryCodes.getDeviceLocale();
-                  print(deviceLocale!.countryCode); // Displays US
+                  print(deviceLocale!.countryCode); 
                 },
                 child: Text('Get Your Location'),
                 color: Colors.greenAccent,
               ),
-
-              //// MAKE IT DYNAMIC
               placemarks == null
                   ? Container()
                   : Text(
                       placemarks[0].country,
                       style: TextStyle(color: Colors.white),
                     ),
-
-              ///gender /// bithdate bouns
-              //// Button for save value
               MaterialButton(
                 onPressed: () async {
                   if (!formkey.currentState!.validate()) {
@@ -337,12 +305,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       'CountryCode': deviceLocale!.countryCode,
                       'Point':0,
                     });
-                    //// after save the value go to main screen (the root)
-                    //// use Go_Router Function to go to this screen
                     GoRouter.of(context).go('/');
                   } on FirebaseException catch (e) {
                     if (e.code == 'weak-password') {
-                      //use method toast
                       Fluttertoast.showToast(
                           msg: "weak password",
                           toastLength: Toast.LENGTH_SHORT,
@@ -382,4 +347,3 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 }
-// how firebase work with flutter

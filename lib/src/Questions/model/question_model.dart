@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class QuestionModel {
   dynamic flag;
   String? question;

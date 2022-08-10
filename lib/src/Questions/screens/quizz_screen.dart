@@ -9,38 +9,28 @@ import 'package:game_template/src/Questions/Oceania_Questions.dart';
 import 'package:game_template/src/Questions/South_America_Questions.dart';
 import 'package:game_template/src/Questions/flag_question_template.dart';
 import 'package:game_template/src/Questions/screens/result_screen.dart';
-
 import '../data/questions_example.dart';
 import '../ui/shared/color.dart';
-
 int score = 0;
 bool btnPressed = false;
 bool answered = true;
 String btnText = "Next Question";
-
 class QuizzScreen extends StatefulWidget {
   String quizzCountry;
   QuizzScreen({required this.quizzCountry, Key? key}) : super(key: key);
-
   @override
   _QuizzScreenState createState() => _QuizzScreenState();
 }
-
 class _QuizzScreenState extends State<QuizzScreen> {
   int question_pos = 0;
-
   PageController? _controller;
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = PageController(initialPage: 0);
   }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColor.pripmaryColor,
       body: Padding(
@@ -124,9 +114,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                                 : questions[index].flag == null
                                                     ? Container()
                                                     : questions[index].flag,
-                    // SizedBox(
-                    //   height: 10.0,
-                    // ),
                     SizedBox(
                       width: double.infinity,
                       height: 200.0,
@@ -159,9 +146,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                                 : BuildQ(
                                                     quesIndex:
                                                         questions[index]),
-                    // SizedBox(
-                    //   height: 40.0,
-                    // ),
                     RawMaterialButton(
                       onPressed: () {
                         if (_controller!.page?.toInt() ==
@@ -174,7 +158,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                           _controller!.nextPage(
                               duration: Duration(milliseconds: 250),
                               curve: Curves.easeInExpo);
-
                           setState(() {
                             btnPressed = false;
                           });
@@ -190,7 +173,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                       ),
                     ),
                     Spacer(),
-
                   ],
                 );
               },
@@ -212,15 +194,12 @@ class _QuizzScreenState extends State<QuizzScreen> {
     );
   }
 }
-
 class BuildQ extends StatefulWidget {
   dynamic quesIndex;
   BuildQ({this.quesIndex, Key? key}) : super(key: key);
-
   @override
   State<BuildQ> createState() => _BuildQState();
 }
-
 class _BuildQState extends State<BuildQ> {
   @override
   Widget build(BuildContext context) {

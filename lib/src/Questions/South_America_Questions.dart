@@ -1,7 +1,6 @@
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'model/question_model.dart';
-
 List<QuestionModel> saQuestions=[
 QuestionModel(
 question:
@@ -12,7 +11,6 @@ question:
 "Iguaza Falls": false,
 "Victoria Falls": false,
 }),
-
 QuestionModel(
 question:
 "Which is the highest mountain in South America?",
@@ -22,7 +20,6 @@ question:
 "Aconcagua": true,
 "Tipas": false,
 }),
-
 QuestionModel(
 question:
 "What is the name of the largest lake in South America?",
@@ -32,7 +29,6 @@ question:
 "Lake Valencia": false,
 "Villarrica Lake": false,
 }),
-
 QuestionModel(
 question:
 "Which South American country do the Easter Islands in the Pacific Ocean belong to?",
@@ -42,7 +38,6 @@ question:
 "Bolivia": false,
 "Argentina": false,
 }),
-
 QuestionModel(
 question:
 "What is the name of the royal city built by the Inca in Peru?",
@@ -52,7 +47,6 @@ question:
 "Alexandria": false,
 "Macchu Picchu": true,
 }),
-
 QuestionModel(
 question:
 "What is the name of the region in South America that is shared by Chile and Argentina?",
@@ -62,7 +56,6 @@ question:
 "faroe islands": false,
 "Bermuda Triangle": false,
 }),
-
 QuestionModel(
 question:
 "Which of the following is not a city in Colombia?",
@@ -72,7 +65,6 @@ question:
 "Cartagena": false,
 "Medellin": false,
 }),
-
 QuestionModel(
 question:
 "Which South American country is the largest in both population and land size?",
@@ -82,7 +74,6 @@ question:
 "Bolivia": false,
 "Peru": false,
 }),
-
 QuestionModel(
 question:
 "What is the Capital city of Argentina?",
@@ -92,7 +83,6 @@ question:
 "Santiago": false,
 "Buenos Aires": true,
 }),
-
 QuestionModel(
 question:
 "What is the official language of Brazil?",
@@ -103,4 +93,3 @@ answers: {
 "French": false,
 },),
 ];
-

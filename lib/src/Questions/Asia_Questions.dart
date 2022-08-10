@@ -1,5 +1,4 @@
 import 'model/question_model.dart';
-
 List<QuestionModel> asQuestions=[
  QuestionModel(
 question:
@@ -20,7 +19,6 @@ answers: {
 "Japan": false,
 "Vietnam": false,
 }),
-
 QuestionModel(
 question: "How many landlocked countries are there in Asia?",
 answers: {
@@ -29,8 +27,6 @@ answers: {
  "15": false,
  "18": false,
  }),
-
-
  QuestionModel(
 question:
  "What is the name of the largest desert in Asia?",
@@ -40,7 +36,6 @@ answers: {
  "Karakum Desert": false,
  "Gobi Desert": true,
  }),
-
  QuestionModel(
 question:
  "Which is the highest building in Asia (and the world)?",
@@ -50,7 +45,6 @@ answers: {
     "Tokyo Tower": false,
  "Jin Mao Tower": false,
  }),
-
  QuestionModel(
 question:
  "What is the name of the highest mountain in Asia?",
@@ -60,7 +54,6 @@ answers: {
  "Kilamanjaro": false,
  "Mount Etna": false,
  }),
-
  QuestionModel(
 question:
  "How many islands belong to the Maldives?",
@@ -70,7 +63,6 @@ answers: {
  "119": false,
  "1190": true,
  }),
-
  QuestionModel(
 question:
  "What is the name of the longest river in Asia?",
@@ -80,7 +72,6 @@ answers: {
  "Mekong River": false,
  "Yangtse River": true,
  }),
-
  QuestionModel(
 question:
  "What is the currency used in China?",
@@ -90,7 +81,6 @@ answers: {
  "Ruble": false,
  "Won": false,
  }),
-
 QuestionModel(
 question:
  "How many recognised languages are spoken in India?",

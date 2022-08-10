@@ -1,10 +1,8 @@
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import '../model/question_model.dart';
-
 List<QuestionModel> questions = [
   QuestionModel(
-
     question:
     "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {
@@ -15,7 +13,6 @@ List<QuestionModel> questions = [
     },
   ),
   QuestionModel(
-
     question:
     "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {
@@ -26,7 +23,6 @@ List<QuestionModel> questions = [
     },
   ),
   QuestionModel(
-
     question:
     "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {
@@ -37,7 +33,6 @@ List<QuestionModel> questions = [
     },
   ),
   QuestionModel(
-
     question:
     "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {
@@ -48,7 +43,6 @@ List<QuestionModel> questions = [
     },
   ),
   QuestionModel(
-
     question:
     "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {
@@ -59,7 +53,6 @@ List<QuestionModel> questions = [
     },
   ),
   QuestionModel(
-
     question:
         "How Many Whiskers does the average cat have on each side of its face ?",
     answers: {

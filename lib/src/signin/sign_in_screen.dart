@@ -7,23 +7,18 @@ import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-
 import '../../main.dart';
 import '../settings/settings.dart';
-bool _passwordInVisible = true; //a boolean value
+bool _passwordInVisible = true; 
 final formkey = GlobalKey<FormState>();
 TextEditingController userName = TextEditingController();
 TextEditingController password = TextEditingController();
-
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
-
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
-
 class _SignInScreenState extends State<SignInScreen> {
-
   @override
   Widget build(BuildContext context) {
     final settingsController = context.watch<SettingsController>();
@@ -42,7 +37,6 @@ class _SignInScreenState extends State<SignInScreen> {
               );
             },
           ),
-
         ],
       ),
       backgroundColor: AppColor.pripmaryColor,
@@ -56,7 +50,6 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(
                 height: 10,
               ),
-              //userName
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -69,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please Enter YOur Name';
+                          return 'Please Enter Your Name';
                         }
                       },
                       controller: userName,
@@ -83,7 +76,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
               ),
-              //PASSWORD
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -103,11 +95,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _passwordInVisible ? Icons.visibility_off : Icons.visibility, //change icon based on boolean value
+                            _passwordInVisible ? Icons.visibility_off : Icons.visibility, 
                             color: Theme.of(context).primaryColorDark,),
                           onPressed: (){
                             setState((){
-                              _passwordInVisible = !_passwordInVisible; //change boolean value
+                              _passwordInVisible = !_passwordInVisible; 
                             });
                           },
                         ),
@@ -116,21 +108,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         filled: true,
                       ),
                       keyboardType: TextInputType.visiblePassword,
-
                       obscureText: _passwordInVisible,
                     ),
-
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 30,
               ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-
                 child: MaterialButton(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   elevation: 5.0,
@@ -138,9 +125,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 35,
                   color: Color(0xFF801E48),
                   onPressed: () async{
-                    //  context.go('/');
-
-
                     if (!formkey.currentState!.validate()) {
                       return;
                     }
@@ -151,7 +135,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       context.go('/');
                     } on FirebaseException catch (e){
                       if (e.code == 'user-not-found') {
-                        //use method toast
                         Fluttertoast.showToast(
                             msg: "user not found ",
                             toastLength: Toast.LENGTH_SHORT,
@@ -184,12 +167,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           fontSize: 16.0
                       );
                     }
-
-                    //context.go('/');
                     print(userName.text);
                     print(password.text);
                   },
-
                   child: Text('Sign In'),
                 ),
               ),
@@ -198,16 +178,20 @@ class _SignInScreenState extends State<SignInScreen> {
                   GoRouter.of(context).go('/CreateAccount');
                 },
                 child: Text('CreateAccount'),
-                style: ButtonStyle(),
+                style: TextButton.styleFrom(
+                  primary: Colors.white, //Text Color
+                ),
               ),
               TextButton(
                 onPressed: () {
                    GoRouter.of(context).go('/ForgotPassword');
                 },
                 child: Text('ForgotPassword'),
-                style: ButtonStyle(),
+                style: TextButton.styleFrom(
+                  primary: Colors.white, // Text Color
               ),
-            ],
+              )
+            ]
           ),
         ),
       ),

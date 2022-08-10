@@ -1,17 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:game_template/src/Questions/screens/quizz_screen.dart';
 import 'package:provider/provider.dart';
-
 import '../../settings/theme_provider.dart';
 import '../ui/shared/color.dart';
-
-// Initial Selected Value
 dynamic dropdownvalue = 'Europe';
-// List of items in our dropdown menu
 var items = [
-
   'North America',
   'South America',
   'Africa',
@@ -20,20 +14,17 @@ var items = [
   'World Flags',
   'Europe',
 ];
-
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
-
   @override
   _MainMenuState createState() => _MainMenuState();
 }
-
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor:themeProvider.isDarkMode?Colors.black: AppColor.pripmaryColor,
+      backgroundColor:themeProvider.isDarkMode?Colors.black: AppColor.secondaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 48.0,
@@ -70,21 +61,14 @@ class _MainMenuState extends State<MainMenu> {
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
               alignment: AlignmentDirectional.center,
-              // Initial Value
               value: dropdownvalue,
-
-              // Down Arrow Icon
               icon: const Icon(Icons.keyboard_arrow_down),
-
-              // Array list of items
               items: items.map((String items) {
                 return DropdownMenuItem(
                   value: items,
                   child: Text(items),
                 );
               }).toList(),
-              // After selecting the desired option,it will
-              // change button value to selected value
               onChanged: (newValue) {
                 setState(() {
                   dropdownvalue = newValue;
@@ -95,7 +79,6 @@ class _MainMenuState extends State<MainMenu> {
               child: Center(
                 child: RawMaterialButton(
                   onPressed: () {
-
                          Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -105,7 +88,7 @@ class _MainMenuState extends State<MainMenu> {
                             ));
                   },
                   shape: const StadiumBorder(),
-                  fillColor: AppColor.secondaryColor,
+                  fillColor: AppColor.pripmaryColor,
                   child: const Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -137,6 +120,3 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 }
-
-/// Test6@gmail.com
-/// 123456Aa.1

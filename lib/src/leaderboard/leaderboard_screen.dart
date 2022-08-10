@@ -1,15 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../Questions/ui/shared/color.dart';
-
 class LeaderBoard extends StatefulWidget {
   const LeaderBoard({Key? key}) : super(key: key);
-
   @override
   State<LeaderBoard> createState() => _LeaderBoardState();
 }
-
 class _LeaderBoardState extends State<LeaderBoard> {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
           if (snap.connectionState == ConnectionState.waiting) {
             return const Text("Loading");
           }
-
           List data = snap.data.docs.toList();
           data.sort((a, b) => b['Point'].compareTo(a['Point']));
           return DataTable(columnSpacing: 170, dataRowHeight: 100, columns: [

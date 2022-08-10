@@ -1,12 +1,7 @@
-// Copyright 2022, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:game_template/src/Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../audio/audio_controller.dart';
 import '../audio/sounds.dart';
 import '../games_services/games_services.dart';
@@ -14,23 +9,17 @@ import '../settings/settings.dart';
 import '../settings/theme_provider.dart';
 import '../style/palette.dart';
 import '../style/responsive_screen.dart';
-
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
     final gamesServicesController = context.watch<GamesServicesController?>();
     final settingsController = context.watch<SettingsController>();
     final audioController = context.watch<AudioController>();
-    ////////// before return
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
-      ///// and if you have const in this widget delete this const
-      ////themeProvider.isDarkMode?
-      backgroundColor:themeProvider.isDarkMode?Colors.black: AppColor.pripmaryColor,
+      backgroundColor:themeProvider.isDarkMode?Colors.black12: AppColor.secondaryColor,
       body: ResponsiveScreen(
         mainAreaProminence: 0.45,
         squarishMainArea: Center(
@@ -40,7 +29,7 @@ class MainMenuScreen extends StatelessWidget {
               'GeoTrivia!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: themeProvider.isDarkMode?Colors.yellow: Color(0xFF117eeb),
+                color: themeProvider.isDarkMode?Colors.green: Color(0xFF117eeb),
                 fontFamily: 'Permanent Marker',
                 fontSize: 55,
                 height: 1,
@@ -112,26 +101,16 @@ class MainMenuScreen extends StatelessWidget {
                 },
               ),
             ),
-
             _gap,
           ],
         ),
       ),
     );
   }
-
-  /// Prevents the game from showing game-services-related menu items
-  /// until we're sure the player is signed in.
-  ///
-  /// This normally happens immediately after game start, so players will not
-  /// see any flash. The exception is folks who decline to use Game Center
-  /// or Google Play Game Services, or who haven't yet set it up.
   Widget _hideUntilReady({required Widget child, required Future<bool> ready}) {
     return FutureBuilder<bool>(
       future: ready,
       builder: (context, snapshot) {
-        // Use Visibility here so that we have the space for the buttons
-        // ready.
         return Visibility(
           visible: snapshot.data ?? false,
           maintainState: true,
@@ -142,6 +121,5 @@ class MainMenuScreen extends StatelessWidget {
       },
     );
   }
-
   static const _gap = SizedBox(height: 10);
 }
