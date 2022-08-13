@@ -1,7 +1,6 @@
 // Uncomment the following lines when enabling Firebase Crashlytics
 // import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -9,12 +8,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:game_template/src/Create_Account/Create_Account_Screen.dart';
-import 'package:game_template/src/Profile_Screen/Profile_Screen.dart';
-import 'package:game_template/src/Questions/screens/main_menu.dart';
-import 'package:game_template/src/landing_screen/landing_screen.dart';
-import 'package:game_template/src/settings/theme_provider.dart';
-import 'package:game_template/src/signin/sign_in_screen.dart';
+import 'package:geotrivia/src/Create_Account/Create_Account_Screen.dart';
+import 'package:geotrivia/src/Profile_Screen/Profile_Screen.dart';
+import 'package:geotrivia/src/Questions/screens/main_menu.dart';
+import 'package:geotrivia/src/landing_screen/landing_screen.dart';
+import 'package:geotrivia/src/settings/theme_provider.dart';
+import 'package:geotrivia/src/signin/sign_in_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,6 @@ import 'src/app_lifecycle/app_lifecycle.dart';
 import 'src/audio/audio_controller.dart';
 import 'src/crashlytics/crashlytics.dart';
 import 'src/games_services/games_services.dart';
-import 'src/games_services/score.dart';
 import 'src/leaderboard/leaderboard_screen.dart';
 import 'src/main_menu/main_menu_screen.dart';
 import 'src/settings/persistence/local_storage_settings_persistence.dart';

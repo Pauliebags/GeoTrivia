@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_template/src/settings/theme_provider.dart';
+import 'theme_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../style/palette.dart';

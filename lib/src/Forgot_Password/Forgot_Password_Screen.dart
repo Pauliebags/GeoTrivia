@@ -42,6 +42,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 15, right: 15, top: 5),
                     child: TextFormField(
+                       key: Key('addField'),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please Enter YOur Email Address';
@@ -64,6 +65,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 child: MaterialButton(
+                   key: Key('addButton'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   elevation: 5.0,

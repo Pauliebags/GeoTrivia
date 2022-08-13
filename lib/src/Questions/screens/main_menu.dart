@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:game_template/src/Questions/screens/quizz_screen.dart';
+import 'quizz_screen.dart';
 import 'package:provider/provider.dart';
 import '../../settings/theme_provider.dart';
 import '../ui/shared/color.dart';

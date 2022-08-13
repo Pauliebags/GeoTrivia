@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'persistence/settings_persistence.dart';
 class SettingsController {
   final SettingsPersistence _persistence;

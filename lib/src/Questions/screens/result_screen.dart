@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:game_template/src/Questions/screens/main_menu.dart';
+import 'main_menu.dart';
 import '../../main_menu/main_menu_screen.dart';
 import '../ui/shared/color.dart';
 FirebaseAuth _user = FirebaseAuth.instance;

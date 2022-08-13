@@ -1,8 +1,10 @@
 import 'dart:collection';
 import 'dart:math';
+
 import 'package:audioplayers/audioplayers.dart' hide Logger;
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
+
 import '../settings/settings.dart';
 import 'songs.dart';
 import 'sounds.dart';

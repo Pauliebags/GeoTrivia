@@ -1,4 +1,4 @@
-name: game_template
+name: geotrivia
 description: A mobile game built in Flutter.
 
 # Prevent accidental publishing to pub.dev.
@@ -39,7 +39,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  
   flutter_launcher_icons: ^0.9.2
   flutter_lints: ^2.0.1
   test: ^1.19.0

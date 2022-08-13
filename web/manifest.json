@@ -1,6 +1,6 @@
 {
-    "name": "game_template",
-    "short_name": "game_template",
+    "name": "geotrivia",
+    "short_name": "geotrivia",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

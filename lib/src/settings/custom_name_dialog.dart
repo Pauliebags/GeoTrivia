@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:game_template/src/settings/settings.dart';
+import 'settings.dart';
 import 'package:provider/provider.dart';
 void showCustomNameDialog(BuildContext context) {
   showGeneralDialog(

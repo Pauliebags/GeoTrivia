@@ -4,7 +4,7 @@ import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:game_template/src/Questions/ui/shared/color.dart';
+import '../Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
 FirebaseAuth user = FirebaseAuth.instance;
 String? userName;

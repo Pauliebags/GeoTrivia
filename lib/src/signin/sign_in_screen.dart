@@ -1,13 +1,10 @@
-import 'package:country_codes/country_codes.dart';
-import 'package:flag/flag_enum.dart';
-import 'package:flag/flag_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:game_template/src/Questions/ui/shared/color.dart';
-import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../main.dart';
+
+import '../Questions/ui/shared/color.dart';
 import '../settings/settings.dart';
 bool _passwordInVisible = true; 
 final formkey = GlobalKey<FormState>();
@@ -60,6 +57,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 15, right: 15, top: 5),
                     child: TextFormField(
+                      key: Key('addField'),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please Enter Your Name';
@@ -119,6 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 child: MaterialButton(
+                  key: Key('addButton'),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   elevation: 5.0,
                   minWidth: 150.0,

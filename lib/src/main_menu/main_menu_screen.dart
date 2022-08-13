@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_template/src/Questions/ui/shared/color.dart';
+import '../Questions/ui/shared/color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../audio/audio_controller.dart';
