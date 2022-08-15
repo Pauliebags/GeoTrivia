@@ -1,8 +1,5 @@
-// Uncomment the following lines when enabling Firebase Crashlytics
-// import 'dart:io';
-
+// Main.dart page
 import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -34,25 +31,13 @@ import 'src/style/palette.dart';
 import 'src/style/snack_bar.dart';
 
 bool? result;
+
 Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
-  // To enable Firebase Crashlytics, uncomment the following lines and
-  // the import statements at the top of this file.
-  // See the 'Crashlytics' section of the main README.md file for details.
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseCrashlytics? crashlytics;
-  // if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
-  //   try {
-  //     WidgetsFlutterBinding.ensureInitialized();
-  //     await Firebase.initializeApp(
-  //       options: DefaultFirebaseOptions.currentPlatform,
-  //     );
-  //     crashlytics = FirebaseCrashlytics.instance;
-  //   } catch (e) {
-  //     debugPrint("Firebase couldn't be initialized: $e");
-  //   }
-  // }
 
   await guardWithCrashlytics(
     guardedMain,
@@ -60,10 +45,8 @@ Future<void> main() async {
   );
 }
 
-/// Without logging and crash reporting, this would be `void main()`.
 void guardedMain() {
   if (kReleaseMode) {
-    // Don't log anything below warnings in production.
     Logger.root.level = Level.WARNING;
   }
   Logger.root.onRecord.listen((record) {
@@ -79,37 +62,11 @@ void guardedMain() {
     SystemUiMode.edgeToEdge,
   );
 
-  // TODO: When ready, uncomment the following lines to enable integrations.
-  //       Read the README for more info on each integration.
-
-  // if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
-  //   /// Prepare the google_mobile_ads plugin so that the first ad loads
-  //   /// faster. This can be done later or with a delay if startup
-  //   /// experience suffers.
-  //   adsController = AdsController(MobileAds.instance);
-  //   adsController.initialize();
-  // }
-
   GamesServicesController? gamesServicesController;
-  // if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
-  //   gamesServicesController = GamesServicesController()
-  //     // Attempt to log the player in.
-  //     ..initialize();
-  // }
-
-  // if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
-  //   inAppPurchaseController = InAppPurchaseController(InAppPurchase.instance)
-  //     // Subscribing to [InAppPurchase.instance.purchaseStream] as soon
-  //     // as possible in order not to miss any updates.
-  //     ..subscribe();
-  //   // Ask the store what the player has bought already.
-  //   inAppPurchaseController.restorePurchases();
-  // }
 
   runApp(
     MyApp(
       settingsPersistence: LocalStorageSettingsPersistence(),
-
       gamesServicesController: gamesServicesController,
     ),
   );
@@ -118,8 +75,6 @@ void guardedMain() {
 Logger _log = Logger('main.dart');
 
 class MyApp extends StatelessWidget {
-
-
   static final _router = GoRouter(
     initialLocation: '/landingscreen',
     errorBuilder: (context, state) => Scaffold(
@@ -133,14 +88,15 @@ class MyApp extends StatelessWidget {
     ),
     debugLogDiagnostics: true,
     routes: [
-      GoRoute(path: '/landingscreen',builder:(context, state) => LandingScreen() ),
+      GoRoute(
+          path: '/landingscreen', builder: (context, state) => LandingScreen()),
       GoRoute(
           path: '/error',
           builder: (context, state) => Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )),
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )),
       GoRoute(
           path: '/ForgotPassword',
           builder: (context, state) => ForgotPasswordScreen()),
@@ -158,7 +114,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
           path: '/',
           builder: (context, state) =>
-          const MainMenuScreen(key: Key('main menu')),
+              const MainMenuScreen(key: Key('main menu')),
           routes: [
             GoRoute(
               path: 'play',
@@ -170,14 +126,14 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: 'settings',
               builder: (context, state) =>
-              const SettingsScreen(key: Key('settings')),
+                  const SettingsScreen(key: Key('settings')),
             ),
             GoRoute(
                 path: 'ProfileScreen',
                 pageBuilder: (context, state) => buildMyTransition(
-                  child: ProfileScreen(),
-                  color: context.watch<Palette>().backgroundLevelSelection,
-                )),
+                      child: ProfileScreen(),
+                      color: context.watch<Palette>().backgroundLevelSelection,
+                    )),
             GoRoute(
               path: 'leaderBoard',
               builder: (context, state) => LeaderBoard(),
@@ -186,30 +142,23 @@ class MyApp extends StatelessWidget {
     ],
   );
 
-
   final SettingsPersistence settingsPersistence;
 
   final GamesServicesController? gamesServicesController;
 
-
   const MyApp({
     required this.settingsPersistence,
-
     required this.gamesServicesController,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return AppLifecycleObserver(
       child: MultiProvider(
         providers: [
-
           Provider<GamesServicesController?>.value(
               value: gamesServicesController),
-
-
           Provider<SettingsController>(
             lazy: false,
             create: (context) => SettingsController(
@@ -231,8 +180,7 @@ class MyApp extends StatelessWidget {
             },
             dispose: (context, audio) => audio.dispose(),
           ),
-          ChangeNotifierProvider(create: (context)=>ThemeProvider()),
-
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
           Provider(
             create: (context) => Palette(),
           ),
@@ -247,17 +195,6 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
-            // ThemeData.from(
-            //   colorScheme: ColorScheme.fromSeed(
-            //     seedColor: palette.darkPen,
-            //     background: palette.backgroundMain,
-            //   ),
-            //   textTheme: TextTheme(
-            //     bodyText2: TextStyle(
-            //       color: palette.ink,
-            //     ),
-            //   ),
-            // ),
             routeInformationParser: _router.routeInformationParser,
             routerDelegate: _router.routerDelegate,
             scaffoldMessengerKey: scaffoldMessengerKey,

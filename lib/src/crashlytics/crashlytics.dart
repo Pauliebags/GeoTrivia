@@ -6,20 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
-/// Runs [mainFunction] in a guarded [Zone].
-///
-/// If a non-null [FirebaseCrashlytics] instance is provided through
-/// [crashlytics], then all errors will be reported through it.
-///
-/// These errors will also include latest logs from anywhere in the app
-/// that use `package:logging`.
+
 Future<void> guardWithCrashlytics(
     void Function() mainFunction, {
       required FirebaseCrashlytics? crashlytics,
     }) async {
-  // Running the initialization code and [mainFunction] inside a guarded
-  // zone, so that all errors (even those occurring in callbacks) are
-  // caught and can be sent to Crashlytics.
+
   await runZonedGuarded<Future<void>>(() async {
     if (kDebugMode) {
       // Log more when in debug mode.
@@ -68,13 +60,6 @@ Future<void> guardWithCrashlytics(
   });
 }
 
-/// Takes a [stackTrace] and creates a new one, but without the lines that
-/// have to do with this file and logging. This way, Crashlytics won't group
-/// all messages that come from this file into one big heap just because
-/// the head of the StackTrace is identical.
-///
-/// See this:
-/// https://stackoverflow.com/questions/47654410/how-to-effectively-group-non-fatal-exceptions-in-crashlytics-fabrics.
 @visibleForTesting
 StackTrace filterStackTrace(StackTrace stackTrace) {
   try {
